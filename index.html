@@ -5,14 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Assessment Instructions</title>
-  <!-- Link your stylesheet -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <!-- Sticky header -->
   <header class="header" role="banner">
     <!-- Logo -->
-    <img src="logo.png" alt="Sagility Logo" class="logo" />
+    <img src="logo.png" alt="Sagility Logo" class="logo"/>
 
     <!-- Title & subtitle -->
     <h1 class="title">Assessment Instructions</h1>
@@ -21,7 +20,7 @@
     <!-- Source line -->
     <div class="source" aria-label="Source">
       <span>Source:</span>
-      <img src="image.png" alt="Harver Logo" class="harver-logo" />
+      <img src="image.png" alt="harver" class="harver-logo"/>
     </div>
 
     <!-- Buttons placed directly below Source -->
@@ -31,30 +30,29 @@
     </div>
   </header>
 
-  <!-- Dark gutters and centered viewer area -->
-  <div class="viewer-shell">
+  <!-- Centered viewer area (light gutters, like screenshot) -->
+  <main class="viewer-shell">
     <div class="viewer">
       <div id="pdfContainer" class="pdf-container">
-        <!-- PDF loads here -->
-        <embed id="pdfViewer" src="level1.pdf" type="application/pdf" />
+        <embed id="pdfViewer" src="level1.pdf" type="application/pdf"/>
       </div>
     </div>
-  </div>
+  </main>
 
   <!-- JS: load PDF below when a button is clicked -->
   <script>
     (function () {
       const buttons = document.querySelectorAll('.button-group .btn');
-      const pdfViewer = document.getElementById('pdfViewer');
       const pdfContainer = document.getElementById('pdfContainer');
+      const pdfViewer = document.getElementById('pdfViewer');
+      const header = document.querySelector('.header');
 
       function loadPdf(path) {
         if (!path) return;
         pdfViewer.setAttribute('src', path);
 
-        // Smooth scroll just below sticky header
-        const header = document.querySelector('.header');
-        const offset = header.offsetHeight + 8;
+        // Scroll so the viewer top sits just below header
+        const offset = header.offsetHeight + 6;
         const y = pdfContainer.getBoundingClientRect().top + window.pageYOffset - offset;
         window.scrollTo({ top: y, behavior: 'smooth' });
       }
