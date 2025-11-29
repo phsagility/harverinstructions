@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,48 +10,50 @@
 <body>
   <!-- Sticky header -->
   <header class="header" role="banner">
+    <!-- Logo -->
     <img src="logo.png" alt="Sagility Logo" class="logo"/>
 
+    <!-- Title & subtitle -->
     <h1 class="title">Assessment Instructions</h1>
     <p class="subtitle">Please select an assessment level to view the instructions.</p>
 
     <!-- Source line -->
-    <div class="source">
+    <div class="source" aria-label="Source">
       <span>Source:</span>
       <img src="image.png" alt="harver" class="harver-logo"/>
     </div>
 
     <!-- Buttons placed directly below Source -->
     <div class="button-group" aria-label="Assessment levels">
-      <a href="#" class="btn level1" data-pdf="level1.pdf">Level 1 Assessment</a>
-      <a href="#" class="btn level2" data-pdf="level2.pdf">Level 2 Assessment</a>
+      <a class="btn level1" href="#" data-pdf="level1.pdf">Level 1 Assessment</a>
+      <a class="btn level2" href="#" data-pdf="level2.pdf">Level 2 Assessment</a>
     </div>
   </header>
 
-  <!-- Dark gutters and centered viewer area -->
-  <div class="viewer-shell">
+  <!-- Centered viewer area; starts hidden (as in the second pic) -->
+  <main class="viewer-shell">
     <div class="viewer">
-      <div id="pdfContainer" class="pdf-container">
-        <!-- PDF loads here -->
-        <embed id="pdfViewer" src="level1.pdf" type="application/pdf"/>
+      <div id="pdfContainer" class="pdf-container hidden">
+        <embed id="pdfViewer" src="" type="application/pdf"/>
       </div>
     </div>
-  </div>
+  </main>
 
   <!-- JS: load PDF below when a button is clicked -->
   <script>
     (function () {
       const buttons = document.querySelectorAll('.button-group .btn');
-      const pdfViewer = document.getElementById('pdfViewer');
       const pdfContainer = document.getElementById('pdfContainer');
+      const pdfViewer = document.getElementById('pdfViewer');
+      const header = document.querySelector('.header');
 
       function loadPdf(path) {
         if (!path) return;
         pdfViewer.setAttribute('src', path);
+        pdfContainer.classList.remove('hidden');
 
-        // Smooth scroll just below sticky header
-        const header = document.querySelector('.header');
-        const offset = header.offsetHeight + 8;
+        // Scroll so the viewer sits just below sticky header
+        const offset = header.offsetHeight + 6;
         const y = pdfContainer.getBoundingClientRect().top + window.pageYOffset - offset;
         window.scrollTo({ top: y, behavior: 'smooth' });
       }
@@ -64,3 +67,4 @@
     })();
   </script>
 </body>
+</html>
