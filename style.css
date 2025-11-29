@@ -1,16 +1,12 @@
 
-/* -------------------------
-   Base
--------------------------- */
+/* Base */
 body {
-  font-family: "Times New Roman", Georgia, serif; /* serif for content vibe */
+  font-family: "Times New Roman", Georgia, serif; /* screenshot uses a serif look */
   background-color: #fff;
   margin: 0;
 }
 
-/* -------------------------
-   Sticky Header
--------------------------- */
+/* Sticky header with bottom border */
 .header {
   position: sticky;
   top: 0;
@@ -21,16 +17,16 @@ body {
   border-bottom: 1px solid #d9d9d9;
 }
 
-/* Logo */
+/* Centered logo */
 .logo {
-  width: 120px;
+  width: 120px;            /* close to screenshot proportion */
   display: block;
   margin: 4px auto 8px;
 }
 
-/* Title & subtitle (clean sans look like screenshot) */
+/* Title and subtitle */
 .title {
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;  /* clean sans like screenshot */
   font-weight: 700;
   font-size: 24px;
   margin: 0 0 4px;
@@ -56,13 +52,11 @@ body {
 }
 
 .harver-logo {
-  width: 48px;
+  width: 48px;           /* small logo like in screenshot */
   vertical-align: middle;
 }
 
-/* -------------------------
-   Buttons under Source
--------------------------- */
+/* Buttons row */
 .button-group {
   display: inline-flex;
   justify-content: center;
@@ -71,45 +65,36 @@ body {
   margin-top: 6px;
 }
 
-/* Anchor buttons (remove underline!) */
+/* Button styling to match pill-like look */
 .btn {
   font-family: "Segoe UI", Arial, sans-serif;
   font-weight: 700;
   font-size: 12px;
   padding: 8px 14px;
   border-radius: 4px;
-  text-decoration: none;        /* <-- removes underline */
+  text-decoration: none;
   display: inline-block;
   border: 1px solid rgba(0,0,0,0.2);
   box-shadow: inset 0 -2px 0 rgba(0,0,0,0.15);
-  cursor: pointer;
 }
 
 .level1 {
-  background-color: #00aeef;   /* cyan-blue */
-  color: #000;
+  background-color: #00aeef;  /* cyan-blue like screenshot */
+  color: #000;                 /* black text */
 }
 
 .level2 {
   background-color: #001f5b;   /* deep navy */
-  color: #fff;
+  color: #fff;                 /* white text */
 }
 
 .btn:hover {
   filter: brightness(1.05);
 }
 
-/* Optional good focus for accessibility */
-.btn:focus-visible {
-  outline: 3px solid #ffb900;
-  outline-offset: 2px;
-}
+/* ---------- Viewer area (dark gutters) ---------- */
 
-/* -------------------------
-   Viewer area (dark gutters)
--------------------------- */
-
-/* Shell produces dark left/right bars like the screenshot */
+/* Shell provides the dark left/right bars like the screenshot */
 .viewer-shell {
   display: grid;
   grid-template-columns: 1fr minmax(680px, 1000px) 1fr;
@@ -120,7 +105,7 @@ body {
     #fff;
 }
 
-/* Center column that holds the viewer */
+/* Center column for the PDF */
 .viewer {
   grid-column: 2;
 }
@@ -129,7 +114,7 @@ body {
 .pdf-container {
   background: #fff;
   width: 100%;
-  height: calc(100vh - 140px); /* leaves space for sticky header; tweak if header height changes */
+  height: calc(100vh - 140px); /* leaves space for sticky header; adjust if needed */
 }
 
 .pdf-container embed {
@@ -139,12 +124,10 @@ body {
   background-color: #fff;
 }
 
-/* -------------------------
-   Responsive tweaks
--------------------------- */
+/* Responsive tweaks (keep proportions similar to screenshot) */
 @media (max-width: 900px) {
   .viewer-shell {
-    grid-template-columns: 8px 1fr 8px; /* thinner gutters on smaller screens */
+    grid-template-columns: 8px 1fr 8px; /* thinner gutters on small screens */
   }
   .pdf-container {
     height: calc(100vh - 150px);
