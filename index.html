@@ -1,32 +1,36 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assessment Instructions</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Assessment Instructions</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <header class="header">
-        <img src="logo.png" alt="Sagility Logo" class="logo">
-        <h1>Assessment Instructions</h1>
-        <p>Please select an assessment level to view the instructions.</p>
-        <div class="source">
-            <span>Source:</span>
-            <img src="image.png" alt="Harver Logo" class="harver-logo">
-        </div>
-        <div class="button-group">
-            <button id="level1Btn" class="btn level1">Level 1 Assessment</button>
-            <button id="level2Btn" class="btn level2">Level 2 Assessment</button>
-        </div>
-    </header>
+  <header class="header">
+    <img src="logo.png" alt="Sagility Logo" class="logo"/>
+    <h1>Assessment Instructions</h1>
+    <p>Please select an assessment level to view the instructions.</p>
 
-    <main>
-        <div id="pdfContainer" class="pdf-container hidden">
-            <embed id="pdfViewer" src="" type="application/pdf">
-        </div>
-    </main>
+    <div class="source">
+      <span>Source:</span>
+      <img src="image.png" alt="Harver Logo" class="harver-logo"/>
+    </div>
 
-    <script src="script.js"></script>
+    <!-- Turn buttons into anchors that open the PDFs -->
+    <div class="button-group">
+      <a class="btn level1" href="level1.pdf" target="_blank" rel="noopener">Level 1 Assessment</a>
+      <a class="btn level2" href="level2.pdf" target="_blank" rel="noopener">Level 2 Assessment</a>
+    </div>
+  </header>
+
+  <!-- Optional: remove main if you don't embed PDFs -->
+  <main>
+    <!-- You can remove this container if you use simple links -->
+    <div id="pdfContainer" class="pdf-container hidden">
+      <embed id="pdfViewer" src="" type="application/pdf"/>
+    </div>
+  </main>
 </body>
 </html>
