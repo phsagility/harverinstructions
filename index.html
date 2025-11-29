@@ -1,35 +1,184 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Assessment Instructions</title>
-  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Link your existing stylesheet if you have one -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Minimal inline styles to ensure layout works even without style.css -->
+  <style>
+    :root {
+      --brand: #0078d4;
+      --brand-dark: #005a9e;
+      --text: #111;
+      --muted: #666;
+      --border: #e5e5e5;
+      --bg: #fff;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+    .header {
+      text-align: center;
+      padding: 1.25rem 1rem 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      height: 36px;
+      vertical-align: middle;
+    }
+    h1 {
+      margin: 0.5rem 0 0.25rem;
+      font-size: 1.5rem;
+    }
+    .source {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .harver-logo {
+      height: 16px;
+      vertical-align: middle;
+    }
+
+    .viewer-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .pdf-frame {
+      width: 100%;
+      height: 75vh;           /* large visible area for the PDF */
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #f8f9fb;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin: 0.75rem 0 0;
+    }
+    .btn {
+      appearance: none;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      color: #fff;
+      background: var(--brand);
+    }
+    .btn.level2 { background: var(--brand-dark); }
+    .btn:hover { opacity: 0.93; }
+
+    .fallback {
+      text-align: center;
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .hidden { display: none; }
+    .link-btn {
+      color: #fff;
+      text-decoration: none;
+      display: inline-block;
+      padding: 0.55rem 0.9rem;
+      border-radius: 6px;
+      background: var(--brand);
+      margin-left: 0.5rem;
+    }
+  </style>
 </head>
 <body>
+  <!-- Header -->
   <header class="header">
-    <img src="logo.png" alt="Sagility Logo" class="logo"/>
+    <img src="logo.png" alt="Sagility Logo" class="logo" />
     <h1>Assessment Instructions</h1>
     <p>Please select an assessment level to view the instructions.</p>
 
     <div class="source">
       <span>Source:</span>
-      <img src="image.png" alt="Harver Logo" class="harver-logo"/>
-    </div>
-
-    <!-- Turn buttons into anchors that open the PDFs -->
-    <div class="button-group">
-      <a class="btn level1" href="level1.pdf" target="_blank" rel="noopener">Level 1 Assessment</a>
-      <a class="btn level2" href="level2.pdf" target="_blank" rel="noopener">Level 2 Assessment</a>
+      <img src="image.png" alt="Harver Logo" class="harver-logo" />
     </div>
   </header>
 
-  <!-- Optional: remove main if you don't embed PDFs -->
-  <main>
-    <!-- You can remove this container if you use simple links -->
-    <div id="pdfContainer" class="pdf-container hidden">
-      <embed id="pdfViewer" src="" type="application/pdf"/>
+  <!-- PDF viewer first -->
+  <main class="viewer-wrap">
+    <!-- Inline PDF viewer (iframe is broadly compatible) -->
+    <iframe
+      id="pdfViewer"
+      class="pdf-frame"
+      src="level1.pdf"
+      title="Assessment PDF"
+      loading="lazy"
+    ></iframe>
+
+    <!-- Buttons directly below the PDF -->
+    <div class="button-group">
+      <button id="level1Btn" class="btn level1">Level 1 Assessment</button>
+      <button id="level2Btn" class="btn level2">Level 2 Assessment</button>
     </div>
+
+    <!-- Fallback if the PDF fails to render inline -->
+    <p id="fallback" class="fallback hidden">
+      If the PDF does not display properly, open it in a new tab:
+      <a id="fallbackLink" class="link-btn" href="level1.pdf" target="_blank" rel="noopener">Open Current PDF</a>
+    </p>
   </main>
+
+  <!-- Inline script to keep everything in one file -->
+  <script>
+    // Map buttons to their PDF files (filenames must match exactly)
+    const PDF_MAP = {
+      level1Btn: "level1.pdf",
+      level2Btn: "level2.pdf",
+    };
+
+    const pdfViewer = document.getElementById("pdfViewer");
+    const fallback = document.getElementById("fallback");
+    const fallbackLink = document.getElementById("fallbackLink");
+
+    // Helper: set the current PDF
+    function setPdf(path) {
+      // Update viewer
+      pdfViewer.src = path;
+
+      // Update fallback link
+      fallbackLink.href = path;
+
+      // Try a simple fallback reveal if loading takes too long
+      // (Browsers don't reliably fire error events for PDFs in iframes.)
+      fallback.classList.add("hidden");
+      const timer = setTimeout(() => {
+        // If load hasn't fired quickly, show fallback
+        fallback.classList.remove("hidden");
+      }, 2000);
+
+      // If it loads, hide the fallback
+      pdfViewer.addEventListener("load", () => {
+        clearTimeout(timer);
+        fallback.classList.add("hidden");
+      }, { once: true });
+    }
+
+    // Wire up buttons
+    Object.keys(PDF_MAP).forEach((btnId) => {
+      const btn = document.getElementById(btnId);
+      btn?.addEventListener("click", () => setPdf(PDF_MAP[btnId]));
+    });
+
+    // Initialize fallback for the default PDF
+    fallbackLink.href = "level1.pdf";
+  </script>
 </body>
-</html>
