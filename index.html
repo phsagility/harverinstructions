@@ -5,26 +5,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Assessment Instructions</title>
-  <link rel="stylesheet" href="style.css"/>
+  <!-- Link your stylesheet -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- Sticky header -->
   <header class="header" role="banner">
-    <img src="logo.png" alt="Sagility Logo" class="logo"/>
+    <!-- Logo -->
+    <img src="logo.png" alt="Sagility Logo" class="logo" />
 
+    <!-- Title & subtitle -->
     <h1 class="title">Assessment Instructions</h1>
     <p class="subtitle">Please select an assessment level to view the instructions.</p>
 
     <!-- Source line -->
-    <div class="source">
+    <div class="source" aria-label="Source">
       <span>Source:</span>
-      <img src="image.png" alt="harver" class="harver-logo"/>
+      <img src="image.png" alt="Harver Logo" class="harver-logo" />
     </div>
 
     <!-- Buttons placed directly below Source -->
     <div class="button-group" aria-label="Assessment levels">
-      <a href="#" class="btn level1" data-pdf="level1.pdf">Level 1 Assessment</a>
-      <a href="#" class="btn level2" data-pdf="level2.pdf">Level 2 Assessment</a>
+      <a class="btn level1" href="#" data-pdf="level1.pdf">Level 1 Assessment</a>
+      <a class="btn level2" href="#" data-pdf="level2.pdf">Level 2 Assessment</a>
     </div>
   </header>
 
@@ -33,7 +36,7 @@
     <div class="viewer">
       <div id="pdfContainer" class="pdf-container">
         <!-- PDF loads here -->
-        <embed id="pdfViewer" src="level1.pdf" type="application/pdf"/>
+        <embed id="pdfViewer" src="level1.pdf" type="application/pdf" />
       </div>
     </div>
   </div>
@@ -65,3 +68,4 @@
     })();
   </script>
 </body>
+</html>
