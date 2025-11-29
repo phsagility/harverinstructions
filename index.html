@@ -8,29 +8,39 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <header class="header">
-    <img src="logo.png" alt="Sagility Logo" class="logo"/>
-    <h1>Assessment Instructions</h1>
-    <p>Please select an assessment level to view the instructions.</p>
-
-    <div class="source">
-      <span>Source:</span>
-      <img src="image.png" alt="Harver Logo" class="harver-logo"/>
+  <header class="header" role="banner">
+    <div class="brand">
+      <img src="logo.png" alt="Sagility" class="logo"/>
     </div>
 
-    <!-- Turn buttons into anchors that open the PDFs -->
-    <div class="button-group">
-      <a class="btn level1" href="level1.pdf" target="_blank" rel="noopener">Level 1 Assessment</a>
-      <a class="btn level2" href="level2.pdf" target="_blank" rel="noopener">Level 2 Assessment</a>
+    <h1 class="page-title">Assessment Instructions</h1>
+    <p class="page-subtitle">Please select an assessment level to view the instructions.</p>
+
+    <!-- Source line -->
+    <div id="source" class="source-line" aria-label="Source">
+      <span class="source-label">Source:</span>
+      <img src="image.png" alt="Harver" class="harver-logo"/>
     </div>
+
+    <!-- Buttons placed directly below Source -->
+    <nav class="assessment-actions" aria-label="Assessment levels">
+      <a class="btn btn-primary level1" href="level1.pdf" target="_blank" rel="noopener noreferrer">
+        Level 1 Assessment
+      </a>
+      <a class="btn btn-secondary level2" href="level2.pdf" target="_blank" rel="noopener noreferrer">
+        Level 2 Assessment
+      </a>
+    </nav>
   </header>
 
-  <!-- Optional: remove main if you don't embed PDFs -->
+  <!-- If you are only linking to PDFs, main is optional -->
+  <!-- Remove this whole section if not embedding PDFs -->
+  <!--
   <main>
-    <!-- You can remove this container if you use simple links -->
     <div id="pdfContainer" class="pdf-container hidden">
       <embed id="pdfViewer" src="" type="application/pdf"/>
     </div>
   </main>
+  -->
 </body>
 </html>
