@@ -9,38 +9,65 @@
 </head>
 <body>
   <header class="header" role="banner">
-    <div class="brand">
-      <img src="logo.png" alt="Sagility" class="logo"/>
-    </div>
+    <img src="logo.png" alt="Sagility Logo" class="logo"/>
 
-    <h1 class="page-title">Assessment Instructions</h1>
-    <p class="page-subtitle">Please select an assessment level to view the instructions.</p>
+    <h1>Assessment Instructions</h1>
+    <p>Please select an assessment level to view the instructions.</p>
 
     <!-- Source line -->
-    <div id="source" class="source-line" aria-label="Source">
-      <span class="source-label">Source:</span>
-      <img src="image.png" alt="Harver" class="harver-logo"/>
+    <div class="source" aria-label="Source">
+      <span>Source:</span>
+      <img src="image.png" alt="Harver Logo" class="harver-logo"/>
     </div>
 
-    <!-- Buttons placed directly below Source -->
-    <nav class="assessment-actions" aria-label="Assessment levels">
-      <a class="btn btn-primary level1" href="level1.pdf" target="_blank" rel="noopener noreferrer">
-        Level 1 Assessment
-      </a>
-      <a class="btn btn-secondary level2" href="level2.pdf" target="_blank" rel="noopener noreferrer">
-        Level 2 Assessment
-      </a>
-    </nav>
+    <!-- Buttons directly below Source -->
+    <div class="button-group" aria-label="Assessment levels">
+      <!-- Use data-pdf to point to the file to load -->
+      <a class="btn level1" href="#" data-pdf="level1.pdf">Level 1 Assessment</a>
+      <a class="btn level2" href="#" data-pdf="level2.pdf">Level 2 Assessment</a>
+    </div>
   </header>
 
-  <!-- If you are only linking to PDFs, main is optional -->
-  <!-- Remove this whole section if not embedding PDFs -->
-  <!--
   <main>
+    <!-- Inline PDF viewer (initially hidden) -->
     <div id="pdfContainer" class="pdf-container hidden">
       <embed id="pdfViewer" src="" type="application/pdf"/>
     </div>
   </main>
-  -->
+
+  <!-- JS: load PDF below when a button is clicked -->
+  <script>
+    (function () {
+      const buttons = document.querySelectorAll('.button-group .btn');
+      const pdfContainer = document.getElementById('pdfContainer');
+      const pdfViewer = document.getElementById('pdfViewer');
+
+      function loadPdf(path) {
+        // Show container
+        pdfContainer.classList.remove('hidden');
+        // Set the PDF src
+        pdfViewer.setAttribute('src', path);
+
+        // Smooth scroll into view (handles sticky header)
+        const yOffset = -10; // small offset so top isn’t flush
+        const y = pdfContainer.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+
+      // Attach click handlers
+      buttons.forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          const path = this.getAttribute('data-pdf');
+          if (!path) return;
+          loadPdf(path);
+        });
+      });
+
+      // Optional: if you want to auto-load Level 1 by default on first visit,
+      // uncomment the next line:
+      // loadPdf('level1.pdf');
+    })();
+  </script>
 </body>
 </html>
